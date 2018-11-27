@@ -92,9 +92,3 @@ yatzy([X,X,X,X,X]) ->
 	(5*X);
 yatzy([_,_,_,_,_]) ->
 	0.
-
-% calc(max, Roll) ->
-% 	lists:max(Roll).
-
-
-	
