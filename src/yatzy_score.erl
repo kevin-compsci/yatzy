@@ -70,7 +70,7 @@ full_house([Y,Y,X,X,X]) when Y /= X ->
 full_house([_,_,_,_,_]) ->
 	0.
 
-one_pair([X,X,A,B,C]) when A /= B /= C ->
+one_pair([X,X,_,_,_]) ->
 	(2*X);
 one_pair([_,X,X,_,_]) ->
 	(2*X);
