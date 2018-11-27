@@ -70,7 +70,7 @@ full_house([Y,Y,X,X,X]) when Y /= X ->
 full_house([_,_,_,_,_]) ->
 	0.
 
-one_pair([X,X,_,_,_]) ->
+one_pair([X,X,A,B,C]) when A /= B /= C ->
 	(2*X);
 one_pair([_,X,X,_,_]) ->
 	(2*X);
@@ -92,4 +92,3 @@ yatzy([X,X,X,X,X]) ->
 	(5*X);
 yatzy([_,_,_,_,_]) ->
 	0.
-
