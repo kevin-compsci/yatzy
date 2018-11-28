@@ -17,10 +17,10 @@ calc(fives, Roll) ->
 	funct(5, Roll);
 calc(sixes, Roll) ->
 	funct(6, Roll);
-calc(three_of_kind, Roll) ->
-	three_of_kind(lists:sort(Roll));
-calc(four_of_kind, Roll) ->
-	four_of_kind(lists:sort(Roll));
+calc(three_of_a_kind, Roll) ->
+	three_of_a_kind(lists:sort(Roll));
+calc(four_of_a_kind, Roll) ->
+	four_of_a_kind(lists:sort(Roll));
 calc(small_straight, Roll) ->
 	small_straight(lists:sort(Roll));
 calc(large_straight, Roll) ->
@@ -29,28 +29,28 @@ calc(full_house, Roll) ->
 	full_house(lists:sort(Roll));
 calc(one_pair, Roll) ->
 	one_pair(lists:sort(Roll));
-calc(two_pair, Roll) ->
-	two_pair(lists:sort(Roll));
+calc(two_pairs, Roll) ->
+	two_pairs(lists:sort(Roll));
 calc(yatzy, Roll) ->
 	yatzy(lists:sort(Roll)).
 
 funct(V, Roll) ->
 	lists:sum(lists:filter(fun(X) -> X==V end, Roll)).
 
-three_of_kind([X,X,X,_,_]) ->
+three_of_a_kind([X,X,X,_,_]) ->
 	3*X;
-three_of_kind([_,X,X,X,_]) ->
+three_of_a_kind([_,X,X,X,_]) ->
 	3*X;
-three_of_kind([_,_,X,X,X]) ->
+three_of_a_kind([_,_,X,X,X]) ->
 	3*X;
-three_of_kind([_,_,_,_,_]) ->
+three_of_a_kind([_,_,_,_,_]) ->
 	0.
 
-four_of_kind([X,X,X,X,_]) ->
+four_of_a_kind([X,X,X,X,_]) ->
 	4*X;
-four_of_kind([_,X,X,X,X]) ->
+four_of_a_kind([_,X,X,X,X]) ->
 	4*X;
-four_of_kind([_,_,_,_,_]) ->
+four_of_a_kind([_,_,_,_,_]) ->
 	0.
 
 small_straight([1,2,3,4,5]) ->
@@ -70,29 +70,25 @@ full_house([Y,Y,X,X,X]) when Y /= X ->
 full_house([_,_,_,_,_]) ->
 	0.
 
-one_pair([X,X,_,Y,Y]) when Y > X ->
-	(2*Y);
-one_pair([X,X,Y,Y,_]) when Y > X ->
-	(2*Y);
-one_pair([X,X,_,_,_]) ->
-	(2*X);
-one_pair([_,X,X,_,_]) ->
-	(2*X);
 one_pair([_,_,X,X,_]) ->
 	(2*X);
 one_pair([_,_,_,X,X]) ->
 	(2*X);
+one_pair([X,X,_,_,_]) ->
+	(2*X);
+one_pair([_,X,X,_,_]) ->
+	(2*X);
 one_pair([_,_,_,_,_]) ->
 	0.
 
-two_pair([X,X,Y,Y,_]) when X /= Y ->
+two_pairs([X,X,Y,Y,_]) when X /= Y ->
 	(2*X)+(2*Y);
-two_pair([_,X,X,Y,Y]) when X /= Y ->
+two_pairs([_,X,X,Y,Y]) when X /= Y ->
 	(2*X)+(2*Y);
-two_pair([_,_,_,_,_]) ->
+two_pairs([_,_,_,_,_]) ->
 	0.
 
 yatzy([X,X,X,X,X]) ->
-	(5*X);
+	50;
 yatzy([_,_,_,_,_]) ->
 	0.
