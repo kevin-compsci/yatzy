@@ -66,6 +66,5 @@ lower_total(Sheet) ->
 total(Sheet) ->
 	upper_total(Sheet) + lower_total(Sheet) + bonus(Sheet).
 
-
 the_slot_type(Slot) -> 
 	lists:member(Slot, ['chance', 'ones', 'twos', 'threes', 'fours', 'fives', 'sixes', 'one_pair', 'two_pairs', 'three_of_a_kind', 'four_of_a_kind', 'small_straight', 'large_straight', 'full_house', 'yatzy']).
