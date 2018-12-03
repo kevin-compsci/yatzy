@@ -1,10 +1,10 @@
 -module(gen_yatzy_player).
 -export([start_link/1, stop/0, init/1, fill/3, sheet/1]).
--export([handle_call/3]).
+-export([handle_call/3, handle_cast/2]).
 % -export([fill/3, sheet/1]).
 
 -spec start_link(Name::atom()) -> {ok, yatzy_sheet:t()}.
--spec fill(Name::atom(), yatzy:slot(), yatzy:roll()) -> {ok, Score::integer()}.
+-spec fill(Name::atom(), yatzy:slot(), yatzy:roll()) -> {ok, Score::integer()}
                                                       | {error, Reason::any()}.
 -spec sheet(Name::atom()) -> yatzy_sheet:t().
 
@@ -39,7 +39,8 @@ handle_call(sheet, _From, Sheet) ->
 
 
 
-
+handle_cast(_Msg, State) ->
+	{noreply, State}.
 
 
 

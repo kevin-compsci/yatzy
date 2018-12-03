@@ -1,7 +1,8 @@
--module(yatzy_turn).
--export([start/0]).%, roll/2, dice/1, stop/1]).
+-module(gen_yatzy_turn).
+-export([start/0, roll/2, dice/1, stop/1, init/1, callback_mode/0, first_roll/3, second_roll/3, final_roll/3]).
 -behaviour(gen_statem).
 
+-define(NAME, gen_yatzy_turn).
 %-spec start_link() -> {ok, TurnPid::pid()}.
 % -spec roll(TurnPid::pid(), Keep::[1..6]) -> {ok, yatzy:roll()} | invalid_keepers | finished.
 % % Once the player has selected which dice to keep roll the remaining dice unless they
@@ -43,7 +44,7 @@ first_roll({call, From}, {keep, Keep}, Roll) ->
 first_roll({call, From}, get_dice, Roll) ->
 	{keep_state_and_data, {reply, From, {ok, Roll}}};
 first_roll({call, From}, stop, Roll) ->
-
+	{end_state, {reply, From, finished}}.
 
 
 second_roll({call, From}, {keep, Keep}, Roll) ->
@@ -54,7 +55,8 @@ second_roll({call, From}, {keep, Keep}, Roll) ->
 			{next_state, final_roll, NewRoll, {reply, From, {ok, NewRoll}}};
 		false ->
 			{keep_state, Roll, {reply, From, invalid_keepers}}
-	end;
+	end.
+
 final_roll({call, From}, {keep, Keep}, Roll) ->
 	{keep_state, Roll, {reply, From, finished}}.
 
